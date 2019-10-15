@@ -31,6 +31,7 @@ namespace ReadingJsonEden
             hull.Add(pivot);
             return hull;
         }
+
         public static List<PlaceOfInterest> MonoStoneConvexHull(List<PlaceOfInterest> points)
         {
             points.Sort();

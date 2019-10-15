@@ -26,21 +26,13 @@ namespace ReadingJsonEden
             if (obj is PlaceOfInterest)
             {
                 PlaceOfInterest poi = obj as PlaceOfInterest;
-                return this.Latitude == poi.Latitude && this.Longitude == poi.Longitude;
+                return this.Latitude == poi.Latitude && this.Longitude == poi.Longitude && poi.UserID ==this.UserID && poi.Description == this.Description;
 
             }
             return false;
         }
 
-        //public override int GetHashCode()
-        //{
-        //    var hashCode = 2040498243;
-        //    hashCode = hashCode * -1521134295 + UserID.GetHashCode();
-        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
-        //    hashCode = hashCode * -1521134295 + Longitude.GetHashCode();
-        //    hashCode = hashCode * -1521134295 + Latitude.GetHashCode();
-        //    return hashCode;
-        //}
+  
 
         public int CompareTo(PlaceOfInterest other)
         {

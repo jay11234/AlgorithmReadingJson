@@ -50,7 +50,15 @@ namespace ReadingJsonEden
                     if (latittude > -47 && latittude < -45 && longitude > 164 && longitude < 170)
                     {
                         PlaceOfInterest poi = new PlaceOfInterest(userid, latittude, longitude, description);
-                        initialHashset.Add(poi);
+                        if (CheckDuplicacy(poi, initialHashset))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            initialHashset.Add(poi);
+                        }
+                      
                     }
 
                 }
@@ -59,6 +67,21 @@ namespace ReadingJsonEden
 
             locationList = initialHashset.ToList();
             return locationList;
+        }
+
+        private bool CheckDuplicacy(PlaceOfInterest poi, HashSet<PlaceOfInterest> initialHashset)
+        {
+            bool duplicate = false;
+            foreach (PlaceOfInterest p in initialHashset)
+            {
+
+                if (p.Equals(poi))
+                {
+                    duplicate = true;
+                }
+ 
+            }
+            return duplicate;
         }
 
         private void GMapController_OnMarkerClick(GMapMarker item, MouseEventArgs e)
