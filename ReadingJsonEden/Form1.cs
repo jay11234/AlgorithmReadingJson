@@ -75,29 +75,24 @@ namespace ReadingJsonEden
             SEC.SmallestEnclosingCircle(hull);
             List<PointLatLng> circleList = new List<PointLatLng>();
             textBox1.Text = "Center Point : Lat " + SEC.centerPoint.Latitude.ToString() + "  Lon: " + SEC.centerPoint.Longitude.ToString();
-            textBox2.Text = "Diameter :  " + SEC.diameter.ToString();
+            textBox2.Text = "Radius :  " + SEC.radius.ToString();
             int segments = 1000;
             //PlaceOfInterest testCenterPoint = new PlaceOfInterest(0,SEC.centerPoint.Latitude, 168.38,"");
             double seg = Math.PI * 2 / segments;
-            double aspect = 0.20;
-            double radius = SEC.diameter / 2;
+            double aspect = 0.70;
+            double radius = SEC.radius;
 
             for (int i = 0; i < segments; i++)
             {
 
                 double theta = seg * i;
            
-                double a = SEC.centerPoint.Latitude + Math.Cos(theta) * radius * 0.7;
-                double b = SEC.centerPoint.Longitude + Math.Sin(theta) * radius;
+                double a = SEC.centerPoint.Latitude + Math.Cos(theta) * radius;
+                double b = SEC.centerPoint.Longitude + Math.Sin(theta) * radius ;
 
                 PointLatLng gpoi = new PointLatLng(a, b);
                 circleList.Add(gpoi);
             }
-
-
-             
-
-
 
             encircleMarkers = new GMapOverlay("SEC");
             GMapPolygon gpol = new GMapPolygon(circleList, "circle");
@@ -134,12 +129,12 @@ namespace ReadingJsonEden
 
         private void GMapController_Load(object sender, EventArgs e)
         {
-            locationList = GetLocationTestDat();
+            //locationList = GetLocationTestDat();
             gMapController.Position = new PointLatLng(1, 1);
-           // locationList = GetLocationData();
-            gMapController.MapProvider = BingMapProvider.Instance;
+            locationList = GetLocationData();
+            gMapController.MapProvider = GoogleMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = AccessMode.ServerOnly;
-           // gMapController.Position = new PointLatLng(-46.4139136, 168.355639);
+            gMapController.Position = new PointLatLng(-46.4139136, 168.355639);
             gMapController.Zoom = 12;
             gMapController.ShowCenter = false;
 

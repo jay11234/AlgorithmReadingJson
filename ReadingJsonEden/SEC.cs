@@ -9,7 +9,7 @@ namespace ReadingJsonEden
     public class SEC
     {
         public static PlaceOfInterest centerPoint;
-        public static double diameter;
+        public static double radius;
         public static PlaceOfInterest pointOne;
         public static PlaceOfInterest pointTwo;
         public static PlaceOfInterest pointThree;
@@ -48,9 +48,9 @@ namespace ReadingJsonEden
 
             if (angle >= 90)
             {
-                //diameter
-                centerPoint = Calculation.FindTheCenterPoint(p1, k, p2);
-                diameter = Calculation.PythagorasDistance(p2, p1);
+
+                centerPoint = new PlaceOfInterest(1, (p1.Latitude + p2.Latitude )/ 2, (p1.Longitude + p2.Longitude) / 2, "");
+                radius = Calculation.PythagorasDistance(centerPoint, p1);
                 pointOne = p1; pointTwo = k; pointThree = p2;
             }
    
@@ -58,7 +58,7 @@ namespace ReadingJsonEden
             {
                 //define the circle
                 centerPoint = Calculation.FindTheCenterPoint(p1, k, p2);
-                diameter = Calculation.PythagorasDistance(p1, p2);
+                radius = Calculation.PythagorasDistance(centerPoint, p2);
                 pointOne = p1; pointTwo = k; pointThree = p2;
             }
             else if (Calculation.CalculateAngle(p1, p2, k) > 90)
